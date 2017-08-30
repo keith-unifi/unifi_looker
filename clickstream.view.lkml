@@ -338,6 +338,21 @@ view: clickstream {
     sql: ${TABLE}.visit_start_time_gmt ;;
   }
 
+  dimension: prev_page {
+    type: string
+    sql: ${TABLE}.prev_page ;;
+  }
+
+  dimension: resolution {
+    type: string
+    sql: ${TABLE}.resolution ;;
+  }
+
+  dimension: user_agent {
+    type: string
+    sql: ${TABLE}.user_agent ;;
+  }
+
   measure: number_of_hits{
     type: count
     approximate_threshold: 100000
