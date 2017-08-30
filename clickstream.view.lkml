@@ -353,6 +353,11 @@ view: clickstream {
     sql: ${TABLE}.user_agent ;;
   }
 
+  dimension: service {
+    type: string
+    sql: ${TABLE}.service ;;
+  }
+
   measure: number_of_hits{
     type: count
     approximate_threshold: 100000
