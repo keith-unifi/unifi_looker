@@ -9,4 +9,6 @@ include: "*.dashboard"
 # NOTE: please see https://looker.com/docs/r/sql/bigquery?version=4.20
 # NOTE: for BigQuery specific considerations
 
-explore: clickstream_final {}
+explore: clickstream_final {
+  label: "Clickstream"
+}
