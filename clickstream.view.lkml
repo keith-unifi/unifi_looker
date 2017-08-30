@@ -3,7 +3,10 @@ view: clickstream {
 
   dimension: browser {
     type: string
-    sql: ${TABLE}.browser ;;
+    sql: CASE
+    WHEN ${TABLE}.browser is not null THEN ${TABLE}.browser
+    ELSE 'Not Specified'
+    END ;;
   }
 
   dimension: browser_id {
@@ -13,7 +16,10 @@ view: clickstream {
 
   dimension: browser_type {
     type: string
-    sql: ${TABLE}.browser_type ;;
+    sql: CASE
+    WHEN ${TABLE}.browser_type is not null THEN ${TABLE}.browser_type
+    ELSE 'Not Specified'
+    END ;;
   }
 
   dimension: campaign_view_event_flag {
@@ -180,7 +186,10 @@ view: clickstream {
 
   dimension: os {
     type: string
-    sql: ${TABLE}.os ;;
+    sql: CASE
+    WHEN ${TABLE}.os is not null THEN ${TABLE}.os
+    ELSE 'Not Specified'
+    END ;;
   }
 
   dimension: os_id {
@@ -358,6 +367,13 @@ view: clickstream {
     sql: ${TABLE}.service ;;
   }
 
+  dimension: known_or_unknown {
+    sql: CASE
+                   WHEN ${TABLE}.evar28 is not null THEN 'Known'
+                   ELSE 'Unknown'
+            END ;;
+  }
+
   measure: number_of_hits{
     type: count
     approximate_threshold: 100000
@@ -369,9 +385,14 @@ view: clickstream {
     sql: ${ip} ;;
   }
 
-  measure: new_visits_count{
+  measure: new_visits{
     type: sum
     sql: ${new_visit} ;;
+  }
+
+  measure: total_visits{
+    type: sum
+    sql: ${visit_num} ;;
   }
 
   measure: purchases_count{
