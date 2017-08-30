@@ -1,4 +1,4 @@
-view: clickstream_final {
+view: clickstream {
   sql_table_name: ClickstreamDataset.clickstream_final ;;
 
   dimension: browser {
