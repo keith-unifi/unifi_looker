@@ -124,6 +124,7 @@ view: clickstream {
 
   dimension: geo_country {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.geo_country ;;
   }
 
@@ -337,9 +338,35 @@ view: clickstream {
     sql: ${TABLE}.visit_start_time_gmt ;;
   }
 
-  measure: count {
+  measure: number_of_hits{
     type: count
     approximate_threshold: 100000
-    drill_fields: [visit_start_pagename, first_hit_pagename]
+    drill_fields: [date_time, ip, geo_country, geo_city, visit_start_pagename, first_hit_pagename]
+  }
+
+  measure: unique_visitor_count {
+    type: count_distinct
+    sql: ${ip} ;;
+  }
+
+  measure: new_visits_count{
+    type: sum
+    sql: ${new_visit} ;;
+  }
+
+  measure: purchases_count{
+    type: sum
+    sql: ${purchase_event_flag} ;;
+  }
+
+  measure: product_view_counts{
+    type: sum
+    sql: ${product_view_flag} ;;
+  }
+
+  dimension_group: hit_hour {
+    type: time
+    timeframes: [year, quarter, month, day_of_month, hour_of_day]
+    sql: ${date_time} ;;
   }
 }
