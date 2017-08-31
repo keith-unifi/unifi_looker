@@ -382,7 +382,10 @@ view: clickstream {
 
   measure: unique_visitor_count {
     type: count_distinct
-    sql: ${ip} ;;
+    sql:CASE
+    WHEN ${TABLE}.ip is not null THEN ${TABLE}.ip
+    ELSE ${TABLE}.evar29
+    END ;;
   }
 
   measure: new_visits{
