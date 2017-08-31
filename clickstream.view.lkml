@@ -418,6 +418,26 @@ view: clickstream {
     sql: ${checkout_event_flag} ;;
   }
 
+  measure: campaign_view_count{
+    type: sum
+    sql: ${campaign_view_event_flag} ;;
+  }
+
+  measure: cart_open_count{
+    type: sum
+    sql: ${cart_open_event_flag} ;;
+  }
+
+  measure: cart_view_count{
+    type: sum
+    sql: ${cart_view_event_flag} ;;
+  }
+
+  measure: cart_remove_count{
+    type: sum
+    sql: ${cart_remove_event_flag} ;;
+  }
+
   dimension_group: hit_hour {
     type: time
     timeframes: [year, quarter, month, day_of_month, hour_of_day]
