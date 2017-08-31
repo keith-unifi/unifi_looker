@@ -405,6 +405,16 @@ view: clickstream {
     sql: ${product_view_flag} ;;
   }
 
+  measure: cart_add_count{
+    type: sum
+    sql: ${cart_add_event_flag} ;;
+  }
+
+  measure: checkout_count{
+    type: sum
+    sql: ${checkout_event_flag} ;;
+  }
+
   dimension_group: hit_hour {
     type: time
     timeframes: [year, quarter, month, day_of_month, hour_of_day]
